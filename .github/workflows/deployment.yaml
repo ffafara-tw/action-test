@@ -5,7 +5,7 @@ on:
 jobs:
   check-environment:
     runs-on: ubuntu-latest
-    if: ${{ toJson(['tw-dev', 'tw-staging', 'tw-prod']).includes(github.event.deployment.environment) }}
+    if: ${{ contains(["tw-dev", "tw-staging", "tw-prod"], github.event.deployment.environment) }}
     outputs:
       environment: ${{ steps.set-environment.outputs.environment }}
       full-environment: ${{ steps.set-environment.outputs.full-environment }}

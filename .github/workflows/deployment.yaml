@@ -23,10 +23,10 @@ jobs:
             core.setOutput('environment', environment);
             core.setOutput('full-environment', fullEnvironment);
 
-    display-context:
-      needs: [check-environment]
-      runs-on: ubuntu-latest
-      steps:
-        - run: |
-            echo "${{ needs.check-environment.outputs.environment }}"
-            echo "${{ needs.check-environment.outputs.full-environment }}"
+  display-context:
+    needs: [check-environment]
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          echo "${{ needs.check-environment.outputs.environment }}"
+          echo "${{ needs.check-environment.outputs.full-environment }}"

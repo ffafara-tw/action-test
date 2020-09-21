@@ -7,13 +7,13 @@ jobs:
     runs-on: ubuntu-latest
     env:
       environments-matrix: "[\"tw-dev\", \"tw-staging\", \"tw-prod\"]"
-    if: ${{ fromJson(env.environments-matrix).includes(github.event.deployment.environment) }}
     outputs:
       environment: ${{ steps.set-environment.outputs.environment }}
       full-environment: ${{ steps.set-environment.outputs.full-environment }}
     steps:
       - name: Set Environment
         id: set-environment
+        if: ${{ fromJson(env.environments-matrix).includes(github.event.deployment.environment) }}
         uses: actions/github-script@v3
         with:
           script: |

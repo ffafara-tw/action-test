@@ -13,7 +13,7 @@ jobs:
     steps:
       - name: Set Environment
         id: set-environment
-        if: ${{ fromJson(env.environments-matrix).includes(github.event.deployment.environment) }}
+        if: ${{ contains(fromJson(env.environments-matrix), github.event.deployment.environment) }}
         uses: actions/github-script@v3
         with:
           script: |

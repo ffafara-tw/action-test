@@ -1,0 +1,22 @@
+name:  Application deployment
+on:
+  deployment:
+
+jobs:
+  check-environment:
+    runs-on: ubuntu-latest
+    if: ${{ contains(['tw-dev', 'tw-staging', 'tw-prod'], github.event.deployment.environment) }}
+    outputs:
+      environment: ${{ steps.set-environment.outputs.environment }}
+      full-environment: ${{ steps.set-environment.outputs.full-environment }}
+    steps:
+      - name: Set Environment
+        id: set-environment
+        uses: actions/github-script@v3
+        with:
+          script: |
+            const environment = context.payload.deployment.environment.split("-", 1);
+            const envMap = { 'dev': 'development', 'staging': 'staging', 'prod': 'production' };
+            let fullEnvironment = envMap[environment];
+            core.setOutput('environment', environment);
+            core.setOutput('full-environment', fullEnvironment);

@@ -22,3 +22,11 @@ jobs:
             let fullEnvironment = envMap[environment];
             core.setOutput('environment', environment);
             core.setOutput('full-environment', fullEnvironment);
+
+    display-context:
+      needs: [check-environment]
+      runs-on: ubuntu-latest
+      steps:
+        - run: |
+          echo "${{ needs.check-environment.outpus.environment }}"
+          echo "${{ needs.check-environment.outpus.full-environment }}"

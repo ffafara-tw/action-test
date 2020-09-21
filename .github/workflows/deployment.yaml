@@ -3,9 +3,11 @@ on:
   deployment:
 
 jobs:
+  env:
+    environments-matrix: "[\"tw-dev\", \"tw-staging\", \"tw-prod\"]"
   check-environment:
     runs-on: ubuntu-latest
-    if: ${{ fromJson("[\"tw-dev\", \"tw-staging\", \"tw-prod\"]").includes(github.event.deployment.environment) }}
+    if: ${{ fromJson(env.environments-matrix).includes(github.event.deployment.environment) }}
     outputs:
       environment: ${{ steps.set-environment.outputs.environment }}
       full-environment: ${{ steps.set-environment.outputs.full-environment }}

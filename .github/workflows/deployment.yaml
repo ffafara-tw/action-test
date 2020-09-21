@@ -28,5 +28,5 @@ jobs:
       runs-on: ubuntu-latest
       steps:
         - run: |
-          echo "${{ needs.check-environment.outputs.environment }}"
-          echo "${{ needs.check-environment.outputs.full-environment }}"
+            echo "${{ needs.check-environment.outputs.environment }}"
+            echo "${{ needs.check-environment.outputs.full-environment }}"

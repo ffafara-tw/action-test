@@ -8,13 +8,13 @@ env:
 jobs:
   check-environment:
     runs-on: ubuntu-latest
+    if: ${{ contains(fromJson("[\"tw-dev\", \"tw-staging\", \"tw-prod\"]"), github.event.deployment.environment) }}
     outputs:
       environment: ${{ steps.set-environment.outputs.environment }}
       full-environment: ${{ steps.set-environment.outputs.full-environment }}
     steps:
       - name: Set Environment
         id: set-environment
-        if: ${{ contains(fromJson(env.environments-matrix), github.event.deployment.environment) }}
         uses: actions/github-script@v3
         with:
           script: |

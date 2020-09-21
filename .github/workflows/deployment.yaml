@@ -39,9 +39,9 @@ jobs:
   deployment-status:
     runs-on: ubuntu-latest
     needs: [check-environment, display-context]
-    if: ${{ contains(fromJson(env.environments-matrix), github.event.deployment.environment) }}
     steps:
       - uses: actions/github-script@v3
+        if: ${{ contains(fromJson(env.environments-matrix), github.event.deployment.environment) }}
         with:
           github-token: ${{secrets.GITHUB_TOKEN}}
           previews: 'flash-preview,ant-man-preview'
